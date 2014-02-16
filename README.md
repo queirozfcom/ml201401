@@ -1,4 +1,9 @@
 ml201401
 ========
 
- Code  Issues 0  Pull Requests 0  Wiki  Pulse  Graphs  Network  Settings HTTPS clone URL 	 You can clone with HTTPS, SSH, or Subversion.    Download ZIP Little ML (Machine Learning) toolkit with utilities and some data for testing as well.
+ Little ML (Machine Learning) toolkit with utilities and some data for testing as well.
+ 
+ This includes some helpers to manipulate files, clean data and so on.
+ 
+ 
+**P.S.:** This is a WIP (work in progress). Keep in mind that I had no prior Python experience before doing this. One of the aims of this project is precisely to get me some Python experience.
