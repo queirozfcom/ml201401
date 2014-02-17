@@ -2,7 +2,6 @@
 
 from helpers.files import file_len
 from string import replace
-from re import sub
 import math
 import random
 import sys
