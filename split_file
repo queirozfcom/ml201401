@@ -1,0 +1,62 @@
+#!/usr/bin/env python
+
+from lib.files import file_len
+from string import replace
+from re import sub
+import math
+import random
+import sys
+import os
+import time
+
+file_name = str(sys.argv[1])
+
+num_lines = file_len(file_name)
+
+#training set is twice as large as test set
+
+train_set_size = math.trunc((num_lines/3)*2)
+
+test_set_size = math.trunc((num_lines/3))
+
+# need all line in a single place in order to manipulate them
+with open(file_name) as f:
+    all_lines = f.readlines()
+
+random.shuffle(all_lines)
+
+train_set = list()
+test_set  = list()
+
+for idx,line in enumerate(all_lines):
+	if idx <= train_set_size:
+		train_set.append(line)
+	else:
+		test_set.append(line)
+
+current_dir = os.path.dirname(os.path.realpath(__file__))
+
+base=os.path.basename(file_name)
+
+clean_file_name = os.path.splitext(base)[0]
+
+partitions_directory = current_dir+'/partitions/'+clean_file_name+'___'+replace(str(time.time()),'.','')[5:]
+
+os.mkdir(partitions_directory)
+
+f = open(partitions_directory+'/train_set', 'w')
+
+for line in iter(train_set):
+	f.write(line)
+
+f.close()
+
+f = open(partitions_directory+'/test_set', 'w')
+
+for line in iter(test_set):
+	f.write(line)
+
+f.close()
+
+
+#create_partition_files(file_name,train_lines,test_lines)
