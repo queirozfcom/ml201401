@@ -32,6 +32,7 @@ test_set_size = math.trunc((num_lines/3))
 with open(file_name) as f:
     all_lines = f.readlines()
 
+# we should get a different set each time.
 random.shuffle(all_lines)
 
 train_set = list()
