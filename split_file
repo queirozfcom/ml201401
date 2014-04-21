@@ -17,22 +17,21 @@ if len(sys.argv) < 2:
     print "\nERROR:Please provide the target files containing the data.\n\n"
     sys.exit()
 
+#training set is twice as large as test set
+
 file_name = str(sys.argv[1])
 
-
 num_lines = file_len(file_name)
-
-#training set is twice as large as test set
 
 train_set_size = math.trunc((num_lines/3)*2)
 
 test_set_size = math.trunc((num_lines/3))
 
-# need all line in a single place in order to manipulate them
+# need all lines in a single place in order to manipulate them
 with open(file_name) as f:
     all_lines = f.readlines()
 
-# we should get a different set each time.
+# we should get a different set each time we run this script.
 random.shuffle(all_lines)
 
 train_set = list()
@@ -54,6 +53,9 @@ if header is not None:
     train_set.insert(0,header)
     test_set.insert(0,header)
 
+
+#need a unique name for the directory where i'll keep the generated partitions.
+
 current_dir = os.path.dirname(os.path.realpath(__file__))
 
 base=os.path.basename(file_name)
@@ -63,6 +65,9 @@ clean_file_name = os.path.splitext(base)[0]
 partitions_directory = current_dir+'/partitions/'+clean_file_name+'___'+replace(str(time.time()),'.','')[5:]
 
 os.mkdir(partitions_directory)
+
+
+#we need both train and test sets.
 
 f = open(partitions_directory+'/train_set', 'w')
 
@@ -77,3 +82,5 @@ for line in iter(test_set):
     f.write(line)
 
 f.close()
+
+#file has been partitioned and is now in a directory under partitions/
