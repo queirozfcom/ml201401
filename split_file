@@ -5,7 +5,7 @@
 # and then creates a directory for the contents.
 # the partition files will be created under directory ./partitions/
 
-from helpers.files import file_len,is_header
+from  helpers.files import file_len,is_header
 from string import replace
 import math
 import random
@@ -14,7 +14,7 @@ import os
 import time
 
 if len(sys.argv) < 2:
-    print "\nERROR:Please provide the target files containing the data.\n\n"
+    print "\n\033[31mERROR\033[0m Please provide the target files containing the data.\n\n"
     sys.exit()
 
 #training set is twice as large as test set
