@@ -54,7 +54,7 @@ if header is not None:
     test_set.insert(0,header)
 
 
-#need a unique name for the directory where i'll keep the generated partitions.
+#need a unique name for the directory where i'll keep the generated partitions (in case we do it multiple times)
 
 current_dir = os.path.dirname(os.path.realpath(__file__))
 
