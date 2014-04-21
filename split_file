@@ -5,7 +5,8 @@
 # and then creates a directory for the contents.
 # the partition files will be created under directory ./partitions/
 
-from  helpers.files import file_len,is_header
+from helpers.files import file_len,is_header
+from config.constants import *
 from string import replace
 import math
 import random
@@ -14,7 +15,7 @@ import os
 import time
 
 if len(sys.argv) < 2:
-    print "\n\033[31mERROR\033[0m Please provide the target files containing the data.\n\n"
+    print ERROR+" Please provide the target files containing the data.\n"
     sys.exit()
 
 #training set is twice as large as test set
@@ -27,11 +28,11 @@ train_set_size = math.trunc((num_lines/3)*2)
 
 test_set_size = math.trunc((num_lines/3))
 
-# need all lines in a single place in order to manipulate them
-with open(file_name) as f:
-    all_lines = f.readlines()
+# need all lines in a single place in order to shuffle them
 
 # we should get a different set each time we run this script.
+with open(file_name) as f:
+    all_lines = f.readlines()
 random.shuffle(all_lines)
 
 train_set = list()
@@ -69,14 +70,14 @@ os.mkdir(partitions_directory)
 
 #we need both train and test sets.
 
-f = open(partitions_directory+'/train_set', 'w')
+f = open(partitions_directory+'/train_set.csv', 'w')
 
 for line in iter(train_set):
     f.write(line)
 
 f.close()
 
-f = open(partitions_directory+'/test_set', 'w')
+f = open(partitions_directory+'/test_set.csv', 'w')
 
 for line in iter(test_set):
     f.write(line)

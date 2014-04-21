@@ -2,10 +2,14 @@
 
 # Implementation of KNN algorithm with default K = 5
 # This script expects a directory as argument.
-# Given directory should have 
+# Given directory should have a file called train_set.csv and
+# another file called test_set.csv
 
-from helpers.files import file_len,is_header
+from helpers.files import file_len,is_header,num_attributes
+from config.constants import *
 from string import replace
+import csv
+import numpy as np
 import math
 import random
 import sys
@@ -13,27 +17,38 @@ import os
 import time
 
 if len(sys.argv) < 2:
-    print """\n\033[31mERROR\033[0m Please provide the directory where I can 
-      find test and train partitions (they should be called test_set.csv and 
-      train_set.csv). Optionally, you can also give a second parameter conta
-      ining the number of neighbours I should consider while applying the al
-      gorithm; default = 5.\n\n"""
+    print ERROR+""" Please provide the directory where I can 
+      find test and train partitions (they should be called "test_set.csv" and 
+      "train_set".csv). Optionally, you can also give a second parameter conta
+      ining the number of neighbours I should consider while applying the algo
+      rithm; default = 5.\n"""
     sys.exit()
 
-dir_name = rstrip(lstrip(sys.argv[1],'.'),'/')
+dir_name = sys.argv[1].lstrip('.').rstrip('/').strip(" ")
 
 if not os.path.isfile(dir_name+'/train_set.csv'):
-	print "\n\033[31mERROR\033[0m File {dir_name}/train_set.csv not found."
+	print ERROR+" File "+dir_name+"/train_set.csv not found.\n"
+	sys.exit()
 
 if not os.path.isfile(dir_name+'/test_set.csv'):
-	print "\n\033[31mERROR\033[0m File {dir_name}/test_set.csv not found."
+	print ERROR+" File "+dir_name+"/test_set.csv not found.\n"
+	sys.exit()
 
+#all ok; let's move forward.
 
-default_no_rounds = 5
+default_num_neighbours = 5
 
-no_rounds = sys.argv[2] if len(sys.argv) == 3 else default_no_rounds
+num_neighbours = sys.argv[2] if len(sys.argv) == 3 else default_num_neighbours
 
+train_set_file = dir_name+'/train_set.csv'
+test_set_file = dir_name+'/test_set.csv'
 
+# source: http://stackoverflow.com/questions/4315506/load-csv-into-2d-matrix-with-numpy-for-plotting
+# the first row is a header
+train_set = np.loadtxt(open(train_set_file,"rb"),delimiter=",",skiprows=1)
+
+#data is a numpy matrix
+data = np.loadtxt(open(train_set_file,"rb"),delimiter=",",skiprows=1)
 
 
 
