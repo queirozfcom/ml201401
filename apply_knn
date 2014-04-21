@@ -13,9 +13,27 @@ import os
 import time
 
 if len(sys.argv) < 2:
-    print """\n\033[31mERROR\033[0m Please provide the directory where I can find test 
-      and train partitions. Optionally, you can also give a second 
-      parameter containing the number of neighbours I should consider
-      while applying the algorith; default = 5.\n\n"""
-
+    print """\n\033[31mERROR\033[0m Please provide the directory where I can 
+      find test and train partitions (they should be called test_set.csv and 
+      train_set.csv). Optionally, you can also give a second parameter conta
+      ining the number of neighbours I should consider while applying the al
+      gorithm; default = 5.\n\n"""
     sys.exit()
+
+dir_name = rstrip(lstrip(sys.argv[1],'.'),'/')
+
+if not os.path.isfile(dir_name+'/train_set.csv'):
+	print "\n\033[31mERROR\033[0m File {dir_name}/train_set.csv not found."
+
+if not os.path.isfile(dir_name+'/test_set.csv'):
+	print "\n\033[31mERROR\033[0m File {dir_name}/test_set.csv not found."
+
+
+default_no_rounds = 5
+
+no_rounds = sys.argv[2] if len(sys.argv) == 3 else default_no_rounds
+
+
+
+
+
