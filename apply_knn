@@ -5,7 +5,8 @@
 # Given directory should have a file called train_set.csv and
 # another file called test_set.csv
 
-from helpers.files import file_len,is_header,num_attributes
+import helpers.files as files
+import helpers.normalizers as normalizers
 from config.constants import *
 from string import replace
 import csv
@@ -41,14 +42,11 @@ default_num_neighbours = 5
 num_neighbours = sys.argv[2] if len(sys.argv) == 3 else default_num_neighbours
 
 train_set_file = dir_name+'/train_set.csv'
-test_set_file = dir_name+'/test_set.csv'
+num_rows = files.file_len(train_set_file)
+num_attributes = files.num_attributes(train_set_file)
 
-# source: http://stackoverflow.com/questions/4315506/load-csv-into-2d-matrix-with-numpy-for-plotting
-# the first row is a header
-train_set = np.loadtxt(open(train_set_file,"rb"),delimiter=",",skiprows=1)
 
-#data is a numpy matrix
-data = np.loadtxt(open(train_set_file,"rb"),delimiter=",",skiprows=1)
+train_set = files.load_into_matrix(train_set_file)
 
 
 

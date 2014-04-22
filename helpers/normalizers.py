@@ -1,4 +1,5 @@
 import helpers.types as types
+import math
 
 # TODO unit test this
 
@@ -9,7 +10,7 @@ def normalize(l):
 
 def get_normalizer_for(l):
 
-    type=get_type(l)
+    type=_get_type(l)
 
     if type == 'string':
         return _string_normalizer(l)
@@ -26,9 +27,9 @@ def get_normalizer_for(l):
 #    probably noise, I shouldn't consider everything to be strings just bec
 #    ause of this.)
 def _get_type(l):
-    if all(is_number(el) for el in l):
+    if all(types.is_number(el) for el in l):
         return 'number'
-    elif all(is_date(el) for el in l):
+    elif all(types.is_date(el) for el in l):
         return 'date'
     else:
         return 'string'
@@ -38,12 +39,16 @@ def _get_type(l):
 #disregard whitespace/newline?
 #remove quotes, inverted commas around text
 def _string_normalizer(l):
-    return lambda element: return element
+    return lambda element: element
 
 #normalize to (MAX_VALUE - MIN_VALUE)
-def _number_normalizer(line):
-    return lambda element: return element
+def _number_normalizer(l):
+    max_val = max(l)
+    min_val = min(l)
 
+    return lambda element: round( ( (element-min_val)/(max_val-min_val) ),3)
+    
 #convert everything to a single date Format
-def _date_normalizer(line):
-    return lambda element: return element
+def _date_normalizer(l):
+
+    return lambda element: element
