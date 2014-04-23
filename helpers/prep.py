@@ -1,4 +1,5 @@
 import sys
+import os
 import numpy as np
 import helpers.normalizers as norm
 
@@ -31,3 +32,7 @@ def take_last_third(matrix):
 
 	return np.split(matrix,[two_thirds])[1]
 
+def save_matrix_as_csv(location,matrix):
+	if os.path.isfile(location):
+		os.remove(location)
+	np.savetxt(location,np.asarray(matrix),delimiter=',',fmt="%s")

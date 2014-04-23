@@ -40,5 +40,7 @@ current_dir = os.path.dirname(os.path.realpath(__file__))
 partitions_directory = current_dir+'/data/energy_efficiency/partitions'
 
 #saving the preprocessed partitions
-numpy.savetxt(partitions_directory+"/train_set.csv",numpy.asarray(train_set_matrix),delimiter=',',fmt="%s")
-numpy.savetxt(partitions_directory+"/test_set.csv",numpy.asarray(test_set_matrix),delimiter=',',fmt="%s")
+
+prep.save_matrix_as_csv(partitions_directory+"/train_set.csv",train_set_matrix)
+prep.save_matrix_as_csv(partitions_directory+"/test_set.csv",test_set_matrix)
+
