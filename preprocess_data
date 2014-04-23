@@ -37,7 +37,9 @@ test_set_matrix = prep.take_test_set(data_matrix)
 # finding out the target directory where i should save the partitions
 
 current_dir = os.path.dirname(os.path.realpath(__file__))
-partitions_directory = current_dir+'/data/energy_efficiency/partitions'
+
+partitions_directory = files.get_partitions_dir(file_name)
+
 
 #saving the preprocessed partitions
 

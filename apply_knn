@@ -7,6 +7,8 @@
 
 import helpers.files as files
 import helpers.normalizers as normalizers
+import helpers.knn as knn
+
 from config.constants import *
 from string import replace
 import csv
@@ -27,25 +29,37 @@ if len(sys.argv) < 2:
 dir_name = sys.argv[1].lstrip('.').rstrip('/').strip(" ")
 
 if not os.path.isfile(dir_name+'/train_set.csv'):
-	print ERROR+" File "+dir_name+"/train_set.csv not found.\n"
-	sys.exit()
+    print ERROR+" File "+dir_name+"/train_set.csv not found.\n"
+    sys.exit()
 
 if not os.path.isfile(dir_name+'/test_set.csv'):
-	print ERROR+" File "+dir_name+"/test_set.csv not found.\n"
-	sys.exit()
+    print ERROR+" File "+dir_name+"/test_set.csv not found.\n"
+    sys.exit()
 
 #all ok; let's move forward.
-
-default_num_neighbours = 5
-
-num_neighbours = sys.argv[2] if len(sys.argv) == 3 else default_num_neighbours
 
 train_set_file = dir_name+'/train_set.csv'
 num_rows = files.file_len(train_set_file)
 num_attributes = files.num_attributes(train_set_file)
 
-
 train_set = files.load_into_matrix(train_set_file)
+test_set = files.load_into_matrix(dir_name+'/test_set.csv',False)
 
-test_set = files.load_into_matrix(dir_name+'/test_set.csv')
+all_predictions = list()
+
+for row in test_set:
+    prediction = 0 # previsão inicial é nula
+
+    neighbours = knn.get_nearest_neighbours(row,train_set,NUM_NEIGHBOURS)
+    
+    for neighbour in neighbours:
+        distance = knn.get_distance(row,neighbour)
+        prediction = knn.get_target(neighbour) * (1/distance)
+
+    all_predictions.push(prediction)
+
+
+
+
+
 

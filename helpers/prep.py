@@ -25,17 +25,17 @@ def shuffle(matrix):
 
 def take_train_set(matrix):
 	num_lines = len(matrix)
-	size = int( TRAIN_TO_TEST_RATIO * num_lines )
+	size = int( TRAIN_RATIO * num_lines )
 
 	return np.split(matrix,[size])[0]
 
 def take_test_set(matrix):
 	num_lines = len(matrix)
-	size = int(TRAIN_TO_TEST_RATIO * num_lines )
+	size = int(TRAIN_RATIO * num_lines )
 
 	return np.split(matrix,[size])[1]
 
 def save_matrix_as_csv(location,matrix):
 	if os.path.isfile(location):
 		os.remove(location)
-	np.savetxt(location,np.asarray(matrix),delimiter=DELIMITER,fmt="%s")
+	np.savetxt(location,np.asarray(matrix),delimiter=',',fmt="%s")
