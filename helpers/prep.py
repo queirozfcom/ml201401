@@ -3,36 +3,39 @@ import os
 import numpy as np
 import helpers.normalizers as norm
 
-def normalize(matrix):
-	first_row = matrix[0,:]
-	num_attributes = len(first_row)
+from config.constants import *
 
-	for attr_no in range(num_attributes):
-		normalized_column = norm.normalize(matrix[:,attr_no])
+def normalize(matrix):
+
+	if NORMALIZE_TARGETS:
+		num_columns = NUM_ATTRS + NUM_TARGETS
+	else:
+		num_columns = NUM_ATTRS
+
+	for col_no in range(num_columns):
+		normalized_column = norm.normalize(matrix[:,col_no])
 		for idx,row in enumerate(matrix):
-			row[attr_no]=normalized_column[idx]
+			row[col_no]=normalized_column[idx]
 
 	return matrix
-
 
 def shuffle(matrix):
 	np.random.shuffle(matrix)
 	return matrix
 
-def take_first_two_thirds(matrix):
+def take_train_set(matrix):
 	num_lines = len(matrix)
-	two_thirds = int(2*(num_lines/3))
+	size = int( TRAIN_TO_TEST_RATIO * num_lines )
 
-	return np.split(matrix,[two_thirds])[0]
+	return np.split(matrix,[size])[0]
 
-
-def take_last_third(matrix):
+def take_test_set(matrix):
 	num_lines = len(matrix)
-	two_thirds = int(2*(num_lines/3))
+	size = int(TRAIN_TO_TEST_RATIO * num_lines )
 
-	return np.split(matrix,[two_thirds])[1]
+	return np.split(matrix,[size])[1]
 
 def save_matrix_as_csv(location,matrix):
 	if os.path.isfile(location):
 		os.remove(location)
-	np.savetxt(location,np.asarray(matrix),delimiter=',',fmt="%s")
+	np.savetxt(location,np.asarray(matrix),delimiter=DELIMITER,fmt="%s")

@@ -31,8 +31,8 @@ data_matrix = prep.normalize(data_matrix)
 data_matrix = prep.shuffle(data_matrix)
 
 #training set is twice as large as test set
-train_set_matrix = prep.take_first_two_thirds(data_matrix)
-test_set_matrix = prep.take_last_third(data_matrix)
+train_set_matrix = prep.take_train_set(data_matrix)
+test_set_matrix = prep.take_test_set(data_matrix)
 
 # finding out the target directory where i should save the partitions
 

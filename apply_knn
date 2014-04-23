@@ -20,9 +20,8 @@ import time
 if len(sys.argv) < 2:
     print ERROR+""" Please provide the directory where I can 
       find test and train partitions (they should be called "test_set.csv" and 
-      "train_set".csv). Optionally, you can also give a second parameter conta
-      ining the number of neighbours I should consider while applying the algo
-      rithm; default = 5.\n"""
+      "train_set".csv). Optionally, you can also set config options in config/
+      constants.py\n"""
     sys.exit()
 
 dir_name = sys.argv[1].lstrip('.').rstrip('/').strip(" ")
@@ -48,5 +47,5 @@ num_attributes = files.num_attributes(train_set_file)
 
 train_set = files.load_into_matrix(train_set_file)
 
-
+test_set = files.load_into_matrix(dir_name+'/test_set.csv')
 
