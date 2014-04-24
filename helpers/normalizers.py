@@ -47,7 +47,7 @@ def _number_normalizer(l):
     max_val = max(l)
     min_val = min(l)
 
-    return lambda element: round( ( (element-min_val)/(max_val-min_val) ),3)
+    return lambda element: round( ( (element-min_val)/(max_val-min_val) ),NUM_DIGITS)
     
 #convert everything to a single date Format
 def _date_normalizer(l):

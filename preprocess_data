@@ -24,7 +24,7 @@ if len(sys.argv) < 2:
 file_name = str(sys.argv[1])
 
 #load everything into a matrix (not very scalable I think)
-data_matrix = files.load_into_matrix(file_name)
+data_matrix = files.load_into_matrix(file_name,num_targets=NUM_TARGETS,num_attributes=NUM_ATTRS,input_delimiter=INPUT_DELIMITER)
 
 #normalizing and shuffling
 data_matrix = prep.normalize(data_matrix)
@@ -38,11 +38,11 @@ test_set_matrix = prep.take_test_set(data_matrix)
 
 current_dir = os.path.dirname(os.path.realpath(__file__))
 
-partitions_directory = files.get_partitions_dir(file_name)
+partitions_directory = files.get_partitions_dir_from_file_name(file_name)
 
 
 #saving the preprocessed partitions
 
-prep.save_matrix_as_csv(partitions_directory+"/train_set.csv",train_set_matrix)
-prep.save_matrix_as_csv(partitions_directory+"/test_set.csv",test_set_matrix)
+files.save_matrix_as_csv(partitions_directory+"/train_set.csv",train_set_matrix)
+files.save_matrix_as_csv(partitions_directory+"/test_set.csv",test_set_matrix)
 

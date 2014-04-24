@@ -34,8 +34,3 @@ def take_test_set(matrix):
 	size = int(TRAIN_RATIO * num_lines )
 
 	return np.split(matrix,[size])[1]
-
-def save_matrix_as_csv(location,matrix):
-	if os.path.isfile(location):
-		os.remove(location)
-	np.savetxt(location,np.asarray(matrix),delimiter=',',fmt="%s")

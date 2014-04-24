@@ -39,26 +39,43 @@ if not os.path.isfile(dir_name+'/test_set.csv'):
 #all ok; let's move forward.
 
 train_set_file = dir_name+'/train_set.csv'
-num_rows = files.file_len(train_set_file)
-num_attributes = files.num_attributes(train_set_file)
 
-train_set = files.load_into_matrix(train_set_file)
-test_set = files.load_into_matrix(dir_name+'/test_set.csv',False)
+train_set = files.load_into_matrix(train_set_file,skip_first=False)
 
-all_predictions = list()
+# we won't load the targets because they're what we're trying to predict
+prediction_set = files.load_into_matrix(dir_name+'/test_set.csv',skip_first=False,num_attributes=NUM_ATTRS,load_targets=False,num_targets=NUM_TARGETS)
 
-for row in test_set:
-    prediction = 0 # previsão inicial é nula
+indexes_to_use = filter(lambda x: False if x in EXCLUDE_ATTRS else True,np.arange(NUM_ATTRS))
 
-    neighbours = knn.get_nearest_neighbours(row,train_set,NUM_NEIGHBOURS)
+
+for row in prediction_set:
+
+    # start with zero
+    prediction = 0.0 
+
+    neighbour_index_distances_list = knn.get_nearest_neighbours(row,train_set,indexes_to_use,NUM_NEIGHBOURS,PREDICT_TARGET)
     
-    for neighbour in neighbours:
-        distance = knn.get_distance(row,neighbour)
-        prediction = knn.get_target(neighbour) * (1/distance)
+    total_weight = 0.0
 
-    all_predictions.push(prediction)
+    for neighbour_index_distance_pair in neighbour_index_distances_list:
+
+        neighbour_index = neighbour_index_distance_pair[0]
+        distance = neighbour_index_distance_pair[1]
+
+        neighbour_target = train_set[neighbour_index][PREDICT_TARGET]
+
+        weight = 1.0/distance
+        total_weight += weight
+        prediction += ( neighbour_target * weight )
 
 
+    prediction = round(prediction/total_weight,NUM_DIGITS)
+
+    row[PREDICT_TARGET] = prediction
+
+predictions_dir = files.get_predictions_dir_from_partitions_dir(dir_name)
+
+files.save_matrix_as_csv(predictions_dir+"/prediction_set.csv",prediction_set)
 
 
 
