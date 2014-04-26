@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 # Implementation of KNN algorithm with default K = 5
 # This script expects a directory as argument.
 # Given directory should have a file called train_set.csv and

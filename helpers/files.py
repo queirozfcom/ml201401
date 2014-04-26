@@ -35,4 +35,5 @@ def get_partitions_dir_from_file_name(file_name):
 
 
 def get_predictions_dir_from_partitions_dir(dirname):
-    return 'data/energy_efficiency/predictions'
+
+    return dirname.replace('partitions','predictions')

@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 # Implementation of KNN algorithm with default K = 5
 # This script expects a directory as argument.
 # Given directory should have a file called train_set.csv and
@@ -65,6 +63,7 @@ for row in prediction_set:
         neighbour_target = train_set[neighbour_index][PREDICT_TARGET]
 
         weight = 1.0/distance
+
         total_weight += weight
         prediction += ( neighbour_target * weight )
 
@@ -73,9 +72,12 @@ for row in prediction_set:
 
     row[PREDICT_TARGET] = prediction
 
-predictions_dir = files.get_predictions_dir_from_partitions_dir(dir_name)
 
-files.save_matrix_as_csv(predictions_dir+"/prediction_set.csv",prediction_set)
+
+predictions_dir_name = files.get_predictions_dir_from_partitions_dir(dir_name)
+
+
+files.save_matrix_as_csv(predictions_dir_name+"/prediction_set.csv",prediction_set)
 
 
 

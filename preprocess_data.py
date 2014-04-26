@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 # File normalization and partioning utility
 
 # normalizes and partitions the target file
@@ -24,7 +22,7 @@ if len(sys.argv) < 2:
 file_name = str(sys.argv[1])
 
 #load everything into a matrix (not very scalable I think)
-data_matrix = files.load_into_matrix(file_name,num_targets=NUM_TARGETS,num_attributes=NUM_ATTRS,input_delimiter=INPUT_DELIMITER)
+data_matrix = files.load_into_matrix(file_name,num_targets=NUM_TARGETS,num_attributes=NUM_ATTRS,input_delimiter=INPUT_DELIMITER,skip_first=HAS_HEADER)
 
 #normalizing and shuffling
 data_matrix = prep.normalize(data_matrix)
