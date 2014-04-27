@@ -9,7 +9,7 @@ def get_nearest_neighbours(row,matrix,indexes,num_neighbours=5,predict_target=0)
         distance = get_distance(row,other_row,indexes)
         neighbours_distance.append([idx,distance])
 
-    sorted_neighbours_distance = sorted(neighbours_distance, key=lambda neighbour: neighbour[1],reverse=True)
+    sorted_neighbours_distance = sorted(neighbours_distance, key=lambda neighbour: neighbour[1])
 
     return sorted_neighbours_distance[:num_neighbours]
 

@@ -1,6 +1,5 @@
-# DEBUG
-ERROR="\033[31mERROR\033[0m"
-SUCCESS="\033[32mSUCCESS\033[0m"
+Use these configs...
+
 
 NUM_ATTRS = 13
 NUM_TARGETS = 1
@@ -13,3 +12,8 @@ NUM_NEIGHBOURS = 5
 EXCLUDE_ATTRS= []
 PREDICT_TARGET = 13
 
+
+
+
+
+Downloaded from https://archive.ics.uci.edu/ml/datasets/Housing

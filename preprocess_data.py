@@ -44,3 +44,4 @@ partitions_directory = files.get_partitions_dir_from_file_name(file_name)
 files.save_matrix_as_csv(partitions_directory+"/train_set.csv",train_set_matrix)
 files.save_matrix_as_csv(partitions_directory+"/test_set.csv",test_set_matrix)
 
+print SUCCESS+" Partitions successfully created\n"

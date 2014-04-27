@@ -27,7 +27,6 @@ def save_matrix_as_csv(location,matrix):
         os.remove(location)
     numpy.savetxt(location,numpy.asarray(matrix),delimiter=',',fmt="%s")
 
-
 def get_partitions_dir_from_file_name(file_name):
     project_name = regexp.search('data/([^/]+)/[^/]+',file_name).group(1)
 

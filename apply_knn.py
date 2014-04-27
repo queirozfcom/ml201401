@@ -77,8 +77,6 @@ for row in prediction_set:
 predictions_dir_name = files.get_predictions_dir_from_partitions_dir(dir_name)
 
 
-files.save_matrix_as_csv(predictions_dir_name+"/prediction_set.csv",prediction_set)
+files.save_matrix_as_csv(predictions_dir_name+"_knn/prediction_set.csv",prediction_set)
 
-
-
-
+print SUCCESS+" Predictions have been made using KNN algorithm.\n  Look at \033[36m"+predictions_dir_name+"_knn/prediction_set.csv\033[0m for the results\n"
