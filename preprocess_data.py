@@ -25,12 +25,12 @@ file_name = str(sys.argv[1])
 data_matrix = files.load_into_matrix(file_name,num_targets=NUM_TARGETS,num_attributes=NUM_ATTRS,input_delimiter=INPUT_DELIMITER,skip_first=HAS_HEADER)
 
 #normalizing and shuffling
-data_matrix = prep.normalize(data_matrix)
+data_matrix = prep.normalize(data_matrix,NUM_ATTRS,NUM_TARGETS,NORMALIZE_TARGETS)
 data_matrix = prep.shuffle(data_matrix)
 
 #training set is twice as large as test set
-train_set_matrix = prep.take_train_set(data_matrix)
-test_set_matrix = prep.take_test_set(data_matrix)
+train_set_matrix = prep.take_train_set(data_matrix,TRAIN_RATIO)
+test_set_matrix = prep.take_test_set(data_matrix,TRAIN_RATIO)
 
 # finding out the target directory where i should save the partitions
 

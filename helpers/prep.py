@@ -3,14 +3,12 @@ import os
 import numpy as np
 import helpers.normalizers as norm
 
-from config.constants import *
+def normalize(matrix,num_attrs,num_targets,normalize_targets=False):
 
-def normalize(matrix):
-
-	if NORMALIZE_TARGETS:
-		num_columns = NUM_ATTRS + NUM_TARGETS
+	if normalize_targets:
+		num_columns = num_attrs + num_targets
 	else:
-		num_columns = NUM_ATTRS
+		num_columns = num_attrs
 
 	for col_no in range(num_columns):
 		normalized_column = norm.normalize(matrix[:,col_no])
@@ -23,14 +21,14 @@ def shuffle(matrix):
 	np.random.shuffle(matrix)
 	return matrix
 
-def take_train_set(matrix):
+def take_train_set(matrix,train_ratio):
 	num_lines = len(matrix)
-	size = int( TRAIN_RATIO * num_lines )
+	size = int( train_ratio * num_lines )
 
 	return np.split(matrix,[size])[0]
 
-def take_test_set(matrix):
+def take_test_set(matrix,train_ratio):
 	num_lines = len(matrix)
-	size = int(TRAIN_RATIO * num_lines )
+	size = int(train_ratio * num_lines )
 
 	return np.split(matrix,[size])[1]

@@ -1,7 +1,7 @@
 ml201401
 ========
 
-### INSTRUCTIONS (Portuguese)
+### Instructions (Portuguese)
 
   - Baixar este projeto ( através do git é só dar git clone ou então também pode baixar o .zip do projeto)
   - os dados já estão nos lugares corretos - (data/(nome_do_projeto)/original_data)

@@ -43,6 +43,7 @@ train_set = files.load_into_matrix(train_set_file,skip_first=False)
 # we won't load the targets because they're what we're trying to predict
 prediction_set = files.load_into_matrix(dir_name+'/test_set.csv',skip_first=False,num_attributes=NUM_ATTRS,load_targets=False,num_targets=NUM_TARGETS)
 
+#some attributes may be ignored if user has set config option EXCLUDE_ATTRS
 indexes_to_use = filter(lambda x: False if x in EXCLUDE_ATTRS else True,np.arange(NUM_ATTRS))
 
 

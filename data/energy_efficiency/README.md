@@ -10,5 +10,8 @@ NUM_DIGITS = 3
 NUM_NEIGHBOURS = 5
 EXCLUDE_ATTRS= [5,7]
 PREDICT_TARGET = 9
+NUM_NEURONS_HIDDEN_LAYER = 8
+LEARNING_RATE = 0.3
+NUM_EPOCHS = 10000
 
 Obtained from: https://archive.ics.uci.edu/ml/datasets/Energy+efficiency

@@ -1,9 +1,9 @@
 from helpers.types import is_number
-from config.constants import *
 import numpy
 import sys
 import re as regexp
 import os
+import csv
             
 
 def load_into_matrix(fname,load_targets=True,num_targets=1,num_attributes=0,skip_first=True,input_delimiter=','):
@@ -26,6 +26,22 @@ def save_matrix_as_csv(location,matrix):
     if os.path.isfile(location):
         os.remove(location)
     numpy.savetxt(location,numpy.asarray(matrix),delimiter=',',fmt="%s")
+
+def save_list_of_lists_as_csv(location,list_of_lists):
+    if os.path.isfile(location):
+        os.remove(location)
+
+    with open(location, "wb") as f:
+        writer = csv.writer(f)
+        writer.writerows(list_of_lists)
+
+def save_list_as_csv(location,list):
+    if os.path.isfile(location):
+        os.remove(location) 
+               
+    with open(location, "wb") as f:
+        writer = csv.writer(f)
+        writer.writerow(list)
 
 def get_partitions_dir_from_file_name(file_name):
     project_name = regexp.search('data/([^/]+)/[^/]+',file_name).group(1)

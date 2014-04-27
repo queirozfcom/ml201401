@@ -23,11 +23,8 @@ def get_distance(row1,row2,attr_indexes):
         distance += abs(attr_row2 - attr_row1)
 
     if distance == 0:
+        # otherwise we'll get a division by zero
         return 0.01        
     else:
         return distance         
-    # if they are the same, return a number close to zero but
-    # not zero itself! otherwise we'll get a division by zero
-    # when calculating the weights
-    # return a FLOAT!!
     
