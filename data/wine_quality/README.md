@@ -11,5 +11,8 @@ HAS_HEADER=True
 EXCLUDE_ATTRS= []
 EXCLUDE_TARGETS=[]
 PREDICT_TARGET = 10
+NUM_NEURONS_HIDDEN_LAYER = 6
+LEARNING_RATE = 0.3
+NUM_EPOCHS = 100
 
 Obtained from: http://archive.ics.uci.edu/ml/datasets/Wine+Quality
