@@ -100,15 +100,22 @@ for epoch in range(NUM_EPOCHS):
         for idx,y in enumerate(y_results):
             ann.update_outgoing_weights_for_neuron(wj,idx,network_error,y_results,LEARNING_RATE)
 
-for row in wij:
-    ann.round_row(row,NUM_DIGITS)
-
-ann.round_row(wj,NUM_DIGITS)
 
 predictions_dir_name = files.get_predictions_dir_from_partitions_dir(dir_name)
 
 files.save_list_of_lists_as_csv(predictions_dir_name+"_ann/trained_weights_for_input_nodes.csv",wij)
 files.save_list_as_csv(predictions_dir_name+"_ann/trained_weights_for_output_node.csv",wj)
+
+#the prediction hasn't been done yet (since this is just training) but i'll create the prediction
+#set all the same (target values are marked as NAN)
+
+#this is useful in case we want to know how we got these variables
+constants = "NUM_NEURONS_HIDDEN_LAYER =>",NUM_NEURONS_HIDDEN_LAYER
+constants += "LEARNING_RATE =>",LEARNING_RATE
+constants += "NUM_EPOCHS =>",NUM_EPOCHS
+
+files.save_matrix_as_csv(predictions_dir_name+"_ann/prediction_set.csv",prediction_set)
+files.save_matrix_as_csv(predictions_dir_name+"_ann/configs_used.txt",constants)
 
 print SUCCESS+""" Artificial Neural Network has been successfully trained.
   Look at \033[36m"""+predictions_dir_name+"""_ann/trained_weights_for_input_nodes.csv\033[0m and

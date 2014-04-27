@@ -1,5 +1,6 @@
 import random
 import math
+import sys
 
 LOWER_BOUND = -0.5
 UPPER_BOUND = 0.5
@@ -86,7 +87,7 @@ def update_incoming_weights_for_neuron(weights_matrix,attribute_values,neuron_in
                 old_weight = weights_matrix[attribute_index][neuron_index]
 
                 # see http://en.wikipedia.org/wiki/Backpropagation#Derivation
-                delta_weight = learning_rate * neuron_error * derivative_of_sigmoid(weighted_sum) * attribute_values[neuron_index]
+                delta_weight = learning_rate * neuron_error * derivative_of_sigmoid(weighted_sum) * attribute_values[attribute_index]
 
                 new_weight = old_weight + delta_weight
 
@@ -109,7 +110,7 @@ def update_outgoing_weights_for_neuron(weights_list,neuron_index, network_error,
             weights_list[neuron_index] = new_weight
 
 def dot_product(list1,list2):
-    assert len(list1) == len(list2),' How can I do dot product otherwise?'
+    assert len(list1) == len(list2),' How can I possibly do dot product otherwise?'
 
     size = len(list1)
 
@@ -126,3 +127,30 @@ def derivative_of_sigmoid(x):
 def round_row(row,precision):
     for idx in range(len(row)):
         row[idx] = round( row[idx],precision )
+
+# runs a test instance (row) with given input and output weights
+# and returns the prediction for target_value.
+def run_test_instance(input_weights,output_weights,row,target_value,num_neurons,precision):
+
+    for w_row in input_weights:
+        assert num_neurons == len(w_row),'Each attribute much have one weight for each neuron in the hidden layer.'
+
+    assert len(output_weights) == num_neurons,'There should be one output weight for each hidden-layer neuron.'
+
+    neuron_intermediate_products = range(num_neurons)
+
+    for attr_idx,weight_row in enumerate(input_weights):
+        for neuron_idx,weight in enumerate(weight_row):
+            value = row[attr_idx] * input_weights[attr_idx][neuron_idx]
+            neuron_intermediate_products[neuron_idx] += value
+
+    #we've calculated the values in each hidden-layer neuron
+    #now we join them up using the output weights and work out
+    #the final value which is the estimate for the given row.
+
+    output = 0.0
+
+    for neuron_idx,intermediate_value in enumerate(neuron_intermediate_products):
+        output += intermediate_value * output_weights[neuron_idx]
+
+    return round( output, precision )

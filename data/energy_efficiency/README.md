@@ -1,5 +1,6 @@
 use these configs..
 
+#ALGORITHM CONFIGS
 NUM_ATTRS = 8
 NUM_TARGETS = 2
 NORMALIZE_TARGETS = False
@@ -10,8 +11,8 @@ NUM_DIGITS = 3
 NUM_NEIGHBOURS = 5
 EXCLUDE_ATTRS= []
 PREDICT_TARGET = 9
-NUM_NEURONS_HIDDEN_LAYER = 6
+NUM_NEURONS_HIDDEN_LAYER = 8
 LEARNING_RATE = 0.3
-NUM_EPOCHS = 100
+NUM_EPOCHS = 50
 
 Obtained from: https://archive.ics.uci.edu/ml/datasets/Energy+efficiency

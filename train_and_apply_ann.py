@@ -64,9 +64,9 @@ y_network = None
 
 for epoch in range(NUM_EPOCHS):
     for row in train_set:
-        ############################
+        ######################
         # forward-feeding
-        ############################
+        ######################
         x_values = ann.extract_attributes(row,attributes_to_use,NUM_DIGITS)
 
         for idx,y in enumerate(y_results):
@@ -83,9 +83,9 @@ for epoch in range(NUM_EPOCHS):
 
         y_actual = ann.get_target_for_row(row,PREDICT_TARGET)
 
-        ##########################
+        ####################
         # back-propagation
-        ##########################
+        ####################
         network_error = y_actual - y_network
 
         #propagating the error to the hidden layer neurones
@@ -100,24 +100,30 @@ for epoch in range(NUM_EPOCHS):
         for idx,y in enumerate(y_results):
             ann.update_outgoing_weights_for_neuron(wj,idx,network_error,y_results,LEARNING_RATE)
 
-for row in wij:
-    ann.round_row(row,NUM_DIGITS)
 
-ann.round_row(wj,NUM_DIGITS)
+# the gran finale! setting the predictions using the learned weights
+for idx,row in enumerate(prediction_set):
+    prediction_set[idx][PREDICT_TARGET] = ann.run_test_instance(wij,wj,row,PREDICT_TARGET,NUM_NEURONS_HIDDEN_LAYER,NUM_DIGITS)
+
 
 predictions_dir_name = files.get_predictions_dir_from_partitions_dir(dir_name)
-
 files.save_list_of_lists_as_csv(predictions_dir_name+"_ann/trained_weights_for_input_nodes.csv",wij)
 files.save_list_as_csv(predictions_dir_name+"_ann/trained_weights_for_output_node.csv",wj)
 
-# running the test cases
 
-for idx,row in enumerate(prediction_set):
-    ann.run_instance(wij,wj,)
+#this is useful in case we want to know how we got these variables
+constants = "NUM_NEURONS_HIDDEN_LAYER =>",NUM_NEURONS_HIDDEN_LAYER
+constants += "LEARNING_RATE =>",LEARNING_RATE
+constants += "NUM_EPOCHS =>",NUM_EPOCHS
 
-files.save_matrix_as_csv(predictions_dir_name+"_knn/prediction_set.csv",prediction_set)
+files.save_matrix_as_csv(predictions_dir_name+"_ann/prediction_set.csv",prediction_set)
+files.save_matrix_as_csv(predictions_dir_name+"_ann/configs_used.txt",constants)
 
+print "\n  "+SUCCESS+""" Artificial Neural Network has been successfully trained and executed!
+  Look at \033[36m"""+predictions_dir_name+"""_ann/trained_weights_for_input_nodes.csv\033[0m
+  and \033[36m"""+predictions_dir_name+"""_ann/trained_weights_for_output_node.csv\033[0m 
+  for the weights that were used.
 
-print SUCCESS+""" Artificial Neural Network has been successfully trained.
-  Look at \033[36m"""+predictions_dir_name+"""_ann/trained_weights_for_input_nodes.csv\033[0m and
-  \033[36m"""+predictions_dir_name+"""_ann/trained_weights_for_output_node.csv\033[0m for the weights to be used.\n"""
+  In addition the set located at 
+  \033[36m"""+predictions_dir_name+"""_ann/prediction_set.csv\033[0m contains the predictions
+  based upon the previously mentioned trained weights.\n"""
