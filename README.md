@@ -13,7 +13,7 @@ Para baixar pelo git, basta um comando `git clone`:
 
 O arquivo para download do projeto no formato .zip é:
 
-    "https://github.com/queirozfcom/ml201401/archive/master.zip"
+    https://github.com/queirozfcom/ml201401/archive/master.zip
 
 Os dados já estarão nos lugares corretos, a saber:
   - Conjunto 1: `data/energy_efficiency/`
@@ -25,22 +25,23 @@ Os dados já estarão nos lugares corretos, a saber:
 
 O arquivo `config/constants.py` contém constantes que governarão a execução dos algoritmos. As opções são as seguintes:
  
-  - NUM_ATTRS (inteiro, default 0) 
+  - `NUM_ATTRS` (inteiro, default 0) 
    - O número de atributos no conjunto de dados, ou seja, o número de colunas no arquivo csv.
-  - NUM_TARGETS (inteiro, default 1) 
+  - `NUM_TARGETS` (inteiro, default 1) 
    - O número de variáveis objetivo, ou seja, o número de colunas no arquivo csv após as colunas de variáveis. 
-  - NORMALIZE_TARGETS (boolean, default False)
-   - 
-  - TRAIN_RATIO = (2.0/3.0)
-  - INPUT_DELIMITER = ','
-  - HAS_HEADER=False
-  - NUM_DIGITS = 5
-  - NUM_NEIGHBOURS = 5
-  - EXCLUDE_ATTRS= []
-  - PREDICT_TARGET = 8
-  - NUM_NEURONS_HIDDEN_LAYER = 9
-  - LEARNING_RATE = 0.2
-  - NUM_EPOCHS = 40
+  - `NORMALIZE_TARGETS` (boolean, default False)
+   - Variável que define se as variáveis objetivo também serão normalizadas.
+  - `TRAIN_RATIO` (float, default (2.0/3.0) )
+   - A proporção dos dados do conjunto original que será usada para compor o conjunto de treinamento. 
+  - `INPUT_DELIMITER` = ','
+  - `HAS_HEADER`=False
+  - `NUM_DIGITS` = 5
+  - `NUM_NEIGHBOURS` = 5
+  - `EXCLUDE_ATTRS` = []
+  - `PREDICT_TARGET` = 8
+  - `NUM_NEURONS_HIDDEN_LAYER` = 9
+  - `LEARNING_RATE` = 0.2
+  - `NUM_EPOCHS` = 40
 
   - Rode o script preprocess_data.py com o python.
    
