@@ -46,7 +46,8 @@ def extract_weights_for_neuron(weights_matrix,neuron_index,precision):
 
 
 def sigmoid(x):
-    return 1 / (1+math.exp(-x))
+    val = 1 / (1+math.exp(-x))
+    return round(val,10)#so we don't overflow
 
 
 def intermediate_output(attribute_values,weights,precision):
