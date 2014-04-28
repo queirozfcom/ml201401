@@ -21,6 +21,10 @@ if len(sys.argv) < 2:
 
 file_name = str(sys.argv[1])
 
+if not os.path.isfile(file_name):
+    print ERROR+" File "+file_name+" not found.\n"
+    sys.exit()
+
 #load everything into a matrix (not very scalable I think)
 data_matrix = files.load_into_matrix(file_name,num_targets=NUM_TARGETS,num_attributes=NUM_ATTRS,input_delimiter=INPUT_DELIMITER,skip_first=HAS_HEADER)
 
