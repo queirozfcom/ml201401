@@ -58,18 +58,18 @@ Os seguintes scripts são suficientes para mostrar o funcionamento dos algoritmo
 
 Vale lembrar que todos estes algoritmos usam as configurações definidas no passo anterior.
 
-  - `preprocess_data.py` arquivo_csv
+  - `preprocess_data.py` `<arquivo_csv>`
    - Este script embaralha, normaliza e divide um arquivo csv único em dois arquivos csv: um de teste e um de treinamento.
 
 
-  - `apply_knn.py` diretório_das_partições
+  - `apply_knn.py` `<diretório_das_partições>`
    - Forneça para este script como argumento o caminho para o diretório contendo as partições (ou seja, um arquivo chamado `train_set.csv` e um chamado `test_set.csv`) de um conjunto de dados. Este script aplicará o algoritmo KNN e escreverá os resultados em um arquivo chamado `prediction_set.csv`, dentro da pasta `predictions_knn/`, no mesmo nível do diretório passado como argumento. 	
 
-  - `train_ann.py` diretório_das_partições
-  - Este script irá, usando o diretório passado como argumento e procurando nele um arquivo chamado `train_set.csv`, treinar uma rede neural com uma camada escondida que sirva para estimar instâncias. Para fins de verificação, o valor final dos pesos bem como a configuração usada para obtê-los (número de épocas, taxa de aprendizado e número de neurônios usados) será escrito na pasta `predictions_ann/`.
+  - `train_ann.py` `<diretório_das_partições>`
+   - Este script irá, usando o diretório passado como argumento e procurando nele um arquivo chamado `train_set.csv`, treinar uma rede neural com uma camada escondida que sirva para estimar instâncias. Para fins de verificação, o valor final dos pesos bem como a configuração usada para obtê-los (número de épocas, taxa de aprendizado e número de neurônios usados) será escrito na pasta `predictions_ann/`.
 
   - `train_and_apply_ann.py` diretório_das_partições
    - Este script executará todos os passos do script anterior e, além disso, aplicará o algoritmo e escreverá os resultados em um arquivo chamado `prediction_set.csv`, dentro da pasta `predictions_ann/`. 
 
-  - `do_metrics.py` arquivo_csv_1 arquivo_csv_2 índice
+  - `do_metrics.py` `<arquivo_csv_1>` `<arquivo_csv_2>` `<índice>`
    - Este script pode ser usado para calcular o erro médio levando-se em consideração dois conjuntos de dados (em geral um conjunto de teste e o conjunto derivado com as estimativas obtidas por meio de algum algoritmo) e um índice da coluna (começando em zero) que representa o atributo ou variável objetivo cujo erro deseja-se verificar.
