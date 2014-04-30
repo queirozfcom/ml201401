@@ -33,25 +33,43 @@ O arquivo `config/constants.py` contém constantes que governarão a execução 
    - Variável que define se as variáveis objetivo também serão normalizadas.
   - `TRAIN_RATIO` (float, default (2.0/3.0) )
    - A proporção dos dados do conjunto original que será usada para compor o conjunto de treinamento. 
-  - `INPUT_DELIMITER` = ','
-  - `HAS_HEADER`=False
-  - `NUM_DIGITS` = 5
-  - `NUM_NEIGHBOURS` = 5
-  - `EXCLUDE_ATTRS` = []
-  - `PREDICT_TARGET` = 8
-  - `NUM_NEURONS_HIDDEN_LAYER` = 9
-  - `LEARNING_RATE` = 0.2
-  - `NUM_EPOCHS` = 40
+  - `INPUT_DELIMITER` (char default ',')
+   - O delimitador a ser usado no carregamento do arquivo CSV principal, contendo todos os dados.
+  - `HAS_HEADER` (boolean default False)
+   - Determina se o CSV principal dos dados possui uma linha de cabeçalho, geralmente usado para definir o nome de cada coluna, que representa um atributo no conjunto de dados ou uma variável objetivo.
+  - `NUM_DIGITS` (inteiro)
+   - Define o número de algarismos significativos a serem usados na maioria das contas dos algoritmos.
+  - `NUM_NEIGHBOURS` (inteiro default 5)
+   - Define o número de vizinhos a ser usado no algoritmo KNN.
+  - `EXCLUDE_ATTRS` (lista default [])
+   - Define os índices (começando em zero) das colunas dos atributos que devem ser ignorados na execução dos algoritmos.
+  - `PREDICT_TARGET` (inteiro)
+   - Define o índice da coluna que representa a variável objetivo a ser estimada. 
+  - `NUM_NEURONS_HIDDEN_LAYER` (inteiro)
+   - Número de neurônios a ser usado na (única) camada escondida no algoritmo ANN (rede neural).
+  - `LEARNING_RATE` (float default 0.3)
+   - Taxa de aprendizado a ser usada no algoritmo ANN (rede neural).
+  - `NUM_EPOCHS` (inteiro)
+   - Número de épocas (rodadas de treinamento) a serem usadas no algoritmo ANN (rede neural).
 
-  - Rode o script preprocess_data.py com o python.
-   
-   - Exemplo: python preprocess_data.py data/concrete/original_data/Concrete_Data.csv
-   
-   Este script é responsável por dividir o conjunto de dados fornecido como parâmetro em um conjunto de teste (chamado `test_set.csv` ) e um conjunto de treinamento (chamado `train_set.csv`). A proporção é, por default, 2/3 dos dados para o conjunto de treinamento e 1/3 dos dados para o conjunto de teste.
+### Scripts Principais
 
-  - O passo anterior deve ter criado dois arquivos no diretório data/(nome_do_projeto)/partitions. Um com o nome train_set.csv e outro com o nome test_set.csv
-  - Agora rode o script apply_knn.py com o python, passando como parâmetro o caminho para a pasta onde estão as partições (aquele criado no passo anterior)
-   
-   - Exemplo: python apply_knn.py data/concrete/partitions
+Os seguintes scripts são suficientes para mostrar o funcionamento dos algoritmos e devem ser chamados através do interpretador python.
 
-  - O passo anterior deve ter criado um arquivo chamado prediction_set.csv, dentro da pasta data/(nome_do_projeto)/predictions. Este arquivo contém as previsões calculadas pelo algoritmo. 
+Vale lembrar que todos estes algoritmos usam as configurações definidas no passo anterior.
+
+  - `preprocess_data.py` arquivo_csv
+   - Este script embaralha, normaliza e divide um arquivo csv único em dois arquivos csv: um de teste e um de treinamento.
+
+
+  - `apply_knn.py` diretório_das_partições
+   - Forneça para este script como argumento o caminho para o diretório contendo as partições (ou seja, um arquivo chamado `train_set.csv` e um chamado `test_set.csv`) de um conjunto de dados. Este script aplicará o algoritmo KNN e escreverá os resultados em um arquivo chamado `prediction_set.csv`, dentro da pasta `predictions_knn/`, no mesmo nível do diretório passado como argumento. 	
+
+  - `train_ann.py` diretório_das_partições
+  - Este script irá, usando o diretório passado como argumento e procurando nele um arquivo chamado `train_set.csv`, treinar uma rede neural com uma camada escondida que sirva para estimar instâncias. Para fins de verificação, o valor final dos pesos bem como a configuração usada para obtê-los (número de épocas, taxa de aprendizado e número de neurônios usados) será escrito na pasta `predictions_ann/`.
+
+  - `train_and_apply_ann.py` diretório_das_partições
+   - Este script executará todos os passos do script anterior e, além disso, aplicará o algoritmo e escreverá os resultados em um arquivo chamado `prediction_set.csv`, dentro da pasta `predictions_ann/`. 
+
+  - `do_metrics.py` arquivo_csv_1 arquivo_csv_2 índice
+   - Este script pode ser usado para calcular o erro médio levando-se em consideração dois conjuntos de dados (em geral um conjunto de teste e o conjunto derivado com as estimativas obtidas por meio de algum algoritmo) e um índice da coluna (começando em zero) que representa o atributo ou variável objetivo cujo erro deseja-se verificar.
