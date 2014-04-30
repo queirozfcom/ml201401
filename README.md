@@ -68,7 +68,7 @@ Vale lembrar que todos estes algoritmos usam as configurações definidas no pas
   - `train_ann.py` `<diretório_das_partições>`
    - Este script irá, usando o diretório passado como argumento e procurando nele um arquivo chamado `train_set.csv`, treinar uma rede neural com uma camada escondida que sirva para estimar instâncias. Para fins de verificação, o valor final dos pesos bem como a configuração usada para obtê-los (número de épocas, taxa de aprendizado e número de neurônios usados) será escrito na pasta `predictions_ann/`.
 
-  - `train_and_apply_ann.py` diretório_das_partições
+  - `train_and_apply_ann.py` `<diretório_das_partições>`
    - Este script executará todos os passos do script anterior e, além disso, aplicará o algoritmo e escreverá os resultados em um arquivo chamado `prediction_set.csv`, dentro da pasta `predictions_ann/`. 
 
   - `do_metrics.py` `<arquivo_csv_1>` `<arquivo_csv_2>` `<índice>`
