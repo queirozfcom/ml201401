@@ -3,6 +3,8 @@ ml201401
 
 ## Informações
 
+Trabalho de Aprendizado de Máquina. Contêm implementações dos algoritmos KNN (K-nearest neighbour) e Rede Neural. Ver instruções de instalação e uso.
+
 ### Instalação
 
 Baixar este projeto ( através do git ou então baixando o .zip do projeto).
