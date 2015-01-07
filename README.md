@@ -3,7 +3,7 @@ ml201401
 
 ## Informações
 
-Trabalho de Aprendizado de Máquina. Contêm implementações dos algoritmos KNN (K-nearest neighbour) e Rede Neural. Ver instruções de instalação e uso.
+Trabalho de Aprendizado de Máquina. Contém implementações dos algoritmos KNN (K-nearest neighbour) e Rede Neural. Ver instruções de instalação e uso.
 
 ### Instalação
 
